@@ -6,6 +6,7 @@
 package com.griefcraft.util;
 
 import com.google.common.collect.ImmutableList;
+import com.griefcraft.lwc.LWC;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -22,7 +23,8 @@ import java.util.concurrent.Callable;
 
 public class UUIDFetcher implements Callable<Map<String, UUID>> {
     private static final double PROFILES_PER_REQUEST = 100;
-    private static final String PROFILE_URL = "https://api.mojang.com/profiles/minecraft";
+    private static String profileUrl = LWC.getInstance().getConfiguration().getString("yggdrasil.profileMojangApi",
+            "https://api.mojang.com/profiles/minecraft");
     private final JSONParser jsonParser = new JSONParser();
     private final List<String> names;
     private final boolean rateLimiting;
@@ -66,7 +68,7 @@ public class UUIDFetcher implements Callable<Map<String, UUID>> {
     }
 
     private static HttpURLConnection createConnection() throws Exception {
-        URL url = new URL(PROFILE_URL);
+        URL url = new URL(profileUrl);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
