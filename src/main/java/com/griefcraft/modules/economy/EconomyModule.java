@@ -103,14 +103,16 @@ public class EconomyModule extends JavaModule {
         // Can they afford it?
         if (!lwc.getCurrency().canAfford(player, usageFee)) {
             // Nope!
-            lwc.sendLocale(player, "lwc.economy.insufficientfund.open", "usageFee", lwc.getCurrency().format(usageFee).toString());
+            // TODO: Extract string to string.yml
+            player.sendMessage(Colors.Dark_Red + "You need " + lwc.getCurrency().format(usageFee) + " to open your protection!");
             event.setResult(Result.CANCEL);
             return;
         }
 
         // Charge them!
         lwc.getCurrency().removeMoney(player, usageFee);
-        lwc.sendLocale(player, "lwc.economy.charged.open", "usageFee", lwc.getCurrency().format(usageFee).toString());
+        // TODO: Extract string to string.yml
+        player.sendMessage(Colors.Dark_Green + "You have been charged " + lwc.getCurrency().format(usageFee) + " to open your protection.");
     }
 
     @Override
@@ -156,7 +158,8 @@ public class EconomyModule extends JavaModule {
 
             // check the server bank
             if (!lwc.getCurrency().canCentralBankAfford(charge)) {
-                lwc.sendLocale(player, "lwc.economy.insufficientfund.serverrefund");
+                // TODO: Extract string to string.yml
+                player.sendMessage(Colors.Dark_Red + "The Server's Bank does not contain enough funds to remove that protection!");
                 event.setCancelled(true);
                 return;
             }
@@ -263,7 +266,8 @@ public class EconomyModule extends JavaModule {
             ICurrency currency = lwc.getCurrency();
 
             currency.addMoney(owner, charge);
-            lwc.sendLocale(owner, "lwc.economy.refund.onremove", "charge", currency.format(charge).toString());
+            // TODO: Extract string to string.yml
+            owner.sendMessage(Colors.Dark_Green + "You have been refunded " + currency.format(charge) + " because an LWC protection of yours was removed!");
         }
     }
 
@@ -353,11 +357,14 @@ public class EconomyModule extends JavaModule {
 
         // Check if the charge is free
         if (charge == 0) {
-            lwc.sendLocale(player, "lwc.economy.charged.onthehouse");
+            // TODO: Extract string to string.yml
+            player.sendMessage(Colors.Dark_Green + "This one's on us!");
         } else {
             if (!currency.canAfford(player, charge)) {
-                lwc.sendLocale(player, "lwc.economy.insufficientfund.purchase", "currencyName", currency.getMoneyName().toString());
-                lwc.sendLocale(player, "lwc.economy.insufficientfund.remark", "charge", currency.format(charge).toString());
+                // TODO: Extract string to string.yml
+                player.sendMessage(Colors.Dark_Red + "You do not have enough " + currency.getMoneyName() + " to buy an LWC protection.");
+                // TODO: Extract string to string.yml
+                player.sendMessage(Colors.Dark_Red + "The balance required for an LWC protection is: " + currency.format(charge));
 
                 // remove from cache
                 priceCache.remove(location);
@@ -367,10 +374,8 @@ public class EconomyModule extends JavaModule {
 
             // remove the money from their account
             currency.removeMoney(player, charge);
-            if(usedDiscount)
-                lwc.sendLocale(player, "lwc.economy.charged.discountedprice", "charge", currency.format(charge).toString());
-            else
-                lwc.sendLocale(player, "lwc.economy.charged.normalprice", "charge", currency.format(charge).toString());
+            // TODO: Extract string to string.yml
+            player.sendMessage(Colors.Dark_Green + "Charged " + currency.format(charge) + (usedDiscount ? (Colors.Dark_Red + " (Discount)" + Colors.Dark_Green) : "") + " for an LWC protection. Thank you.");
         }
 
     }
