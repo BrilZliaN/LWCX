@@ -164,6 +164,8 @@ public class LWCPlayer implements CommandSender {
 
     /**
      * Disable all modes enabled by the player
+     *
+     * @return
      */
     public void disableAllModes() {
         modes.clear();

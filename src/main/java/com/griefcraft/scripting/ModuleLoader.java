@@ -300,9 +300,9 @@ public class ModuleLoader {
     }
 
     /**
-     * <p>Check if a method overrides a method using reflection. This method uses a
-     * cache for constant access after the caches are warm and toasty.</p>
-     * 
+     * Check if a method overrides a method using reflection. This method uses a
+     * cache for constant access after the caches are warm and toasty.
+     * <p/>
      * This assumes the object is overriding JavaModule
      *
      * @param object
@@ -396,10 +396,11 @@ public class ModuleLoader {
 
     /**
      * Shutdown the plugin loader
+     *
+     * @todo broadcast UNLOAD
      */
     public void shutdown() {
         pluginModules.clear();
-        // TODO: broadcast UNLOAD
     }
 
     /**

@@ -338,6 +338,8 @@ public class Protection {
 
     /**
      * Encode the AccessRights to JSON
+     *
+     * @return
      */
     @SuppressWarnings("unchecked")
     public void encodeRights() {
@@ -514,6 +516,7 @@ public class Protection {
      * Remove a flag from the protection
      *
      * @param flag
+     * @return
      */
     public void removeFlag(Flag flag) {
         if (removed) {

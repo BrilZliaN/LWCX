@@ -99,6 +99,8 @@ public abstract class Database {
 
     /**
      * The default database engine being used. This is set via config
+     *
+     * @default SQLite
      */
     public static Type DefaultType = Type.NONE;
 

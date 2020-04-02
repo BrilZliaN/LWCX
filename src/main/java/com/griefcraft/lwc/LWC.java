@@ -224,8 +224,8 @@ public class LWC {
     }
 
     /**
-     * <p>Normalize a name to a more readable and usable form.</p>
-     * 
+     * Normalize a name to a more readable & usable form.
+     * <p/>
      * E.g sign_post/wall_sign = Sign, furnace/burning_furnace = Furnace,
      * iron_door_block = iron_door
      *
@@ -896,13 +896,13 @@ public class LWC {
     }
 
     /**
-     * <p>Check the data of locale</p>
+     * Check the data of locale<br />
      * Returns null if invalid
      *
      * @param sender CommandSender
      * @param key    key of locale
      * @param args   Character to be rewritten
-     *               Example: %block% = Chest
+     *               Example: %block% --> Chest
      * @return message or null
      */
     public String[] getLocaleMessage(CommandSender sender, String key, Object... args) {
