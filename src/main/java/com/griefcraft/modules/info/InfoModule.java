@@ -62,10 +62,7 @@ public class InfoModule extends JavaModule {
 
         lwc.sendLocale(player, "lwc.info", "owner", protection.getFormattedOwnerPlayerName(), "type", type);
 
-        // If the event gives them admin permission, or they're already an admin or mod, allow them to view full info
-        boolean canViewFullInfo = event.canAdmin() || lwc.isAdmin(player) || lwc.isMod(player);
-
-        if (canViewFullInfo) {
+        if (event.canAdmin()) {
             if (protection.getType() == Protection.Type.PRIVATE || protection.getType() == Protection.Type.DONATION || protection.getType() == Protection.Type.DISPLAY) {
                 lwc.sendLocale(player, "lwc.acl", "size", protection.getPermissions().size());
                 int index = 0;
@@ -88,7 +85,7 @@ public class InfoModule extends JavaModule {
             }
         }
 
-        if (canViewFullInfo) {
+        if (lwc.isAdmin(player)) {
             if (lwc.getConfiguration().getBoolean("optional.useFormattedInfo", true)) {
                 lwc.sendLocale(player, "protection.interact.info.header");
                 protection.sendProtectionInfo(player);
