@@ -126,10 +126,6 @@ public class DoorMatcher implements ProtectionFinder.Matcher {
         // Match the bottom half of the door
         else if (PROTECTABLES_DOORS.contains(aboveBaseBlock.getType())) {
             finder.addBlock(aboveBaseBlock);
-            // At this point, all door blocks are added. If there is no protection found, we can and should stop.
-            if (finder.loadProtection(true) == null) {
-                return false;
-            }
             finder.addBlock(block.getRelative(BlockFace.DOWN));
             findPressurePlate(finder, block);
             return true;
@@ -138,11 +134,8 @@ public class DoorMatcher implements ProtectionFinder.Matcher {
         // Match the top half of the door
         else if (PROTECTABLES_DOORS.contains(baseBlockState.getType())) {
             Block bottomHalf = block.getRelative(BlockFace.DOWN);
+
             finder.addBlock(bottomHalf);
-            // At this point, all door blocks are added. If there is no protection found, we can and should stop.
-            if (finder.loadProtection(true) == null) {
-                return false;
-            }
             finder.addBlock(bottomHalf.getRelative(BlockFace.DOWN));
             findPressurePlate(finder, bottomHalf);
             return true;
