@@ -35,7 +35,11 @@ import com.griefcraft.modules.pluginsupport.WorldGuard;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 public class ConfigPost300 implements MigrationUtility {
@@ -47,14 +51,14 @@ public class ConfigPost300 implements MigrationUtility {
 
     public void run() {
         LWC lwc = LWC.getInstance();
-        File configFile = new File(lwc.getPlugin().getDataFolder() + File.separator + "lwc.properties");
+        File configFile = new File("plugins/LWC/lwc.properties");
 
         if (!configFile.exists()) {
             return;
         }
 
         // delete internal.ini
-        new File(lwc.getPlugin().getDataFolder() + File.separator + "internal.ini").delete();
+        new File("plugins/LWC/internal.ini").delete();
         logger.info("Converting lwc.properties to new variants");
 
         // we need to convert..

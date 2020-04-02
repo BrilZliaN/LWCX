@@ -177,7 +177,7 @@ public class ModuleLoader {
     /**
      * Path to the root of scripts
      */
-    public final static String ROOT_PATH = LWC.getInstance().getPlugin().getDataFolder().toString();
+    public final static String ROOT_PATH = "plugins/LWC/";
 
     /**
      * Map of loaded modules
